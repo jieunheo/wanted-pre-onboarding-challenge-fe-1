@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-
 const Todo = ({ todo, reloadTodos }) => {
   const { content, createdAt, id, title, updatedAt } = todo;
   const [updating, setUpdating] = useState(false);
@@ -19,23 +18,10 @@ const Todo = ({ todo, reloadTodos }) => {
     setUpdating(true);
   }
 
-  const updateHandler = async (event) => {
+  const updateHandler = (event) => {
     setUpdating(false);
 
-    const url = `http://localhost:8080/todos/${id}`;
-    const response = await fetch(url, {
-      method: 'PUT',
-      headers: { 'Authorization': localStorage.getItem('token'), 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title: inputTitle, content: inputContent })
-    })
-
-    if (!response.ok) {
-      const { details } = await response.json();
-      return;
-    }
-  
-    const { data } = await response.json();
-    reloadTodos();
+    callTodoApi(`todos/${id}`, 'PUT', { title: inputTitle, content: inputContent });
   }
 
   const cencelHandler = () => {
@@ -45,11 +31,16 @@ const Todo = ({ todo, reloadTodos }) => {
     setInputContent(content);
   }
 
-  const deleteHandler = async () => {
-    const url = `http://localhost:8080/todos/${id}`;
+  const deleteHandler = () => {
+    callTodoApi(`todos/${id}`, 'DELETE');
+  }
+
+  const callTodoApi = async (param, method, body = null) => {
+    const url = `http://localhost:8080/${param}`;
     const response = await fetch(url, {
-      method: 'DELETE',
-      headers: { 'Authorization': localStorage.getItem('token'), 'Content-Type': 'application/json' }
+      method: `${method}`,
+      headers: { 'Authorization': localStorage.getItem('token'), 'Content-Type': 'application/json' },
+      body: body && JSON.stringify(body)
     })
 
     if (!response.ok) {
