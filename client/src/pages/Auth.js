@@ -1,10 +1,10 @@
 import AuthForm from "../components/auth/AuthForm";
 
 
-const Auth = () => {
+const Auth = ({ setToken }) => {
   return (
     <div>
-      <AuthForm />
+      <AuthForm setToken={setToken} />
     </div>
   );
 }

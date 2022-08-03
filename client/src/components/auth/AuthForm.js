@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const AuthForm = () => {
+const AuthForm = ({ setToken }) => {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
 
@@ -76,6 +76,7 @@ const AuthForm = () => {
     const { message, token } = await response.json();
     setMessage(message);
     localStorage.setItem("token", token);
+    setToken(localStorage.getItem("token"));
     navigate('/');
   }
 

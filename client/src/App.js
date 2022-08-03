@@ -14,8 +14,6 @@ function App() {
   
   
   useEffect(() => {
-    if(token === localStorage.getItem('token')) return;
-    
     if(localStorage.getItem('token')) {
       setToken(localStorage.getItem('token'));
       setLogin(true);
@@ -36,7 +34,7 @@ function App() {
         </header>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/auth' element={!login ? <Auth /> : <Navigate to='/' />} />
+          <Route path='/auth' element={!login ? <Auth setToken={setToken} /> : <Navigate to='/' />} />
           <Route path='/todos/' element={login ? <ToDos /> :  <Auth />} />
           <Route path='/todos/:id' element={login ? <ToDos /> :  <Auth />} />
           <Route path='*' element={<NotFound />} />
