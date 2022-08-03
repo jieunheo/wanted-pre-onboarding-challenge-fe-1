@@ -7,7 +7,6 @@ import Auth from './pages/Auth';
 import Home from './pages/Home';
 import ToDos from './pages/ToDos';
 import NotFound from './pages/NotFound';
-import TodoItem from './pages/ToDoItem';
 
 function App() {
   const [login, setLogin] = useState(false);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ToDo from "../components/todo/ToDo";
-import ToDoItem from "./ToDoItem";
+import ToDoItem from "../components/todo/ToDoItem";
 import ToDoForm from "../components/todo/ToDoForm";
 import { useParams } from "react-router";
 
