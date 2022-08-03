@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import ToDo from "../components/todo/ToDo";
+import ToDoItem from "./ToDoItem";
 import ToDoForm from "../components/todo/ToDoForm";
+import { useParams } from "react-router";
 
 const ToDos = () => {
+  const { id } = useParams();
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
@@ -32,9 +35,10 @@ const ToDos = () => {
 
   return (
     <div>
+      {id && <ToDoItem id={id} reloadTodos={reloadTodos}/>}
       <ToDoForm setTodos={setTodos} />
       <ul>
-        {todos.length > 0 && todos.map((todo, index) => <ToDo key={todo.id} todo={todo} reloadTodos={reloadTodos} />)}
+        {todos.length > 0 && todos.map((todo) => <ToDo key={todo.id} todo={todo} />)}
         {todos.length === 0 && (
           <li>Todo가 없습니다.</li>
         )}

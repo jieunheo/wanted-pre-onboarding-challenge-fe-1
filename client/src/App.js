@@ -7,6 +7,7 @@ import Auth from './pages/Auth';
 import Home from './pages/Home';
 import ToDos from './pages/ToDos';
 import NotFound from './pages/NotFound';
+import TodoItem from './pages/ToDoItem';
 
 function App() {
   const [login, setLogin] = useState(false);
@@ -37,7 +38,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/auth' element={!login ? <Auth /> : <Navigate to='/' />} />
-          <Route path='/todos' element={login ? <ToDos /> :  <Auth />} />
+          <Route path='/todos/' element={login ? <ToDos /> :  <Auth />} />
+          <Route path='/todos/:id' element={login ? <ToDos /> :  <Auth />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </Router>
