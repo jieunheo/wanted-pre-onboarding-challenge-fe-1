@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const AuthForm = () => {
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
 
   const [message, setMessage] = useState(null);
@@ -75,10 +76,11 @@ const AuthForm = () => {
     const { message, token } = await response.json();
     setMessage(message);
     localStorage.setItem("token", token);
+    navigate('/');
   }
 
   return (
-    <div>
+    <>
       <h1>{isLogin ? '로그인' : '회원가입'}</h1>
       <form method='post' action='/users/create' onSubmit={submitHnadler}>
         <div>
@@ -96,7 +98,7 @@ const AuthForm = () => {
           <button type='button' onClick={() => setIsLogin((prev) => !prev)}>{isLogin ? '회원가입으로' : '로그인으로'}</button>
         </div>
       </form>
-    </div>
+    </>
   )
 }
 

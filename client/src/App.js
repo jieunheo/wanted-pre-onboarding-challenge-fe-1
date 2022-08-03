@@ -5,25 +5,40 @@ import './App.css';
 import Navigation from './components/Navigation';
 import Auth from './pages/Auth';
 import Home from './pages/Home';
+import ToDos from './pages/ToDos';
+import NotFound from './pages/NotFound';
 
 function App() {
-  const [login, setLogin] = useState(null);
-
+  const [login, setLogin] = useState(false);
+  const [token, setToken] = useState(null);
+  
+  
   useEffect(() => {
-    setLogin(localStorage.getItem("token"));
+    if(token === localStorage.getItem('token')) return;
+    
+    if(localStorage.getItem('token')) {
+      setToken(localStorage.getItem('token'));
+      setLogin(true);
 
-  }, [login]);
+    } else {
+      setToken(null);
+      setLogin(false);
+    }
+
+  }, [token]);
 
 
   return (
     <div>
       <Router>
         <header>
-          <Navigation />
+          <Navigation login={login} setToken={setToken} />
         </header>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/auth' element={ login ? <Navigate to="/" /> : <Auth />} />
+          <Route path='/auth' element={!login ? <Auth /> : <Navigate to='/' />} />
+          <Route path='/todos' element={login ? <ToDos /> :  <Auth />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </Router>
     </div>
