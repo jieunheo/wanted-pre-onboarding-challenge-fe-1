@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import './AuthForm.css';
+
 const AuthForm = ({ setToken }) => {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
@@ -83,20 +85,20 @@ const AuthForm = ({ setToken }) => {
   return (
     <>
       <h1>{isLogin ? '로그인' : '회원가입'}</h1>
-      <form method='post' action='/users/create' onSubmit={submitHnadler}>
-        <div>
-          <label htmlFor='email'>이메일</label>
+      <form className='auth' method='post' action='/users/create' onSubmit={submitHnadler}>
+        <div className='form-row'>
           <input type='email' id='email' value={email} onChange={inputChange} />
+          <label htmlFor='email'>이메일</label>
         </div>
-        <div>
-          <label htmlFor='password'>비밀번호</label>
+        <div className='form-row'>
           <input type='password' id='password' value={password} onChange={inputChange} />
+          <label htmlFor='password'>비밀번호</label>
         </div>
         {message && <p className='error'>{message}</p>}
 
-        <div>
+        <div className='actions'>
           <button type='submit' disabled={!(emailEnabled && passwordEnabled)}>{isLogin ? '로그인' : '회원가입'}</button>
-          <button type='button' onClick={() => setIsLogin((prev) => !prev)}>{isLogin ? '회원가입으로' : '로그인으로'}</button>
+          <button type='button' onClick={ () => {setIsLogin((prev) => !prev); setMessage(null) }}>{isLogin ? '회원가입으로' : '로그인으로'}</button>
         </div>
       </form>
     </>

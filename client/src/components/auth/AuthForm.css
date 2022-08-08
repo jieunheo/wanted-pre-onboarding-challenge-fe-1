@@ -1,0 +1,51 @@
+.auth {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form-row {
+  position: relative;
+}
+
+.form-row + .form-row {
+  margin-top: 10px;
+}
+
+.form-row label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #282828;
+
+  transition: all .2s;
+}
+
+.form-row input {
+  width: 100%;
+  padding: 25px 20px 10px;
+  border-radius: 8px;
+}
+
+.form-row input:focus + label,
+.form-row input:not(:empty) + label
+{
+  top: 15px;
+  left: 30px;
+  font-size: 0.8rem;
+}
+
+button + button {
+  margin-top: 10px;
+}
+
+.actions {
+  margin-top: 30px;
+}
+
+.actions button {
+  border-radius: 8px;
+  padding: 15px 20px;
+  width: 100%;
+}

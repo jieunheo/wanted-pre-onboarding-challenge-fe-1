@@ -32,13 +32,15 @@ function App() {
         <header>
           <Navigation login={login} setToken={setToken} />
         </header>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/auth' element={!login ? <Auth setToken={setToken} /> : <Navigate to='/' />} />
-          <Route path='/todos/' element={login ? <ToDos /> :  <Auth />} />
-          <Route path='/todos/:id' element={login ? <ToDos /> :  <Auth />} />
-          <Route path='*' element={<NotFound />} />
-        </Routes>
+        <main>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/auth' element={!login ? <Auth setToken={setToken} /> : <Navigate to='/' />} />
+            <Route path='/todos/' element={login ? <ToDos /> :  <Auth />} />
+            <Route path='/todos/:id' element={login ? <ToDos /> :  <Auth />} />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+        </main>
       </Router>
     </div>
   );

@@ -1,0 +1,12 @@
+header {
+  font-size: 1.5rem;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  padding: 40px;
+  text-align: center;
+}
